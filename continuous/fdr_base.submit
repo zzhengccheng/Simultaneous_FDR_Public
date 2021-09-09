@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --array=0-35
+#SBATCH --ntasks-per-node=10
+#SBATCH --nodes=1
+#SBATCH --time=24:00:00
+#SBATCH --mem-per-cpu=1024
+#SBATCH --job-name=TestData3
+#SBATCH --error=SIM.%J.stdout
+#SBATCH --output=SIM.%J.stderr
+
+module load R/4.0
+R CMD BATCH "--args $SLURM_ARRAY_TASK_ID" Simulation_base.R
